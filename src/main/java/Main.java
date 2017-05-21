@@ -12,10 +12,11 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import spark.Session;
 import java.util.ArrayList;
 import java.util.function.Consumer;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
         // default server settings
@@ -24,14 +25,13 @@ public class Main {
         port(8888);
         populateData(); // populate some data for the memory storage
         OrderList cart = new OrderList();
-
+        logger.info("Shopping cart is made. Object name: " + cart);
 
         //before connection to db and upload, the base files
         before((Request request, Response response) -> {
             DataBaseController dataBaseController = new DBCMethods();
             dataBaseController.makeTables();
             dataBaseController.uploadBaseData();
-
         });
 
         // Always start with more specific routes
@@ -55,6 +55,7 @@ public class Main {
 
         get("/cart", (Request req, Response res) -> {
             OrderList cartFromSession = req.session().attribute("cart");
+            logger.info("Check the shopping cart.");
             String data = cartFromSession.getInCart().get(1).toString();
             String data2 = cartFromSession.getInCart().get(2).toString();
 

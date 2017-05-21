@@ -1,10 +1,12 @@
 package com.codecool.shop.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 
 public class BaseModel {
-
+    private static final Logger logger = LoggerFactory.getLogger(BaseModel.class);
     protected int id;
     protected String name;
     protected String description;
@@ -55,7 +57,7 @@ public class BaseModel {
                     sb.append(field.getName() + ":" + value + ",");
                 }
             } catch (IllegalAccessException e) {
-
+                logger.error("Basemodell toString method catch an error: ", e);
             }
         }
         return sb.toString();

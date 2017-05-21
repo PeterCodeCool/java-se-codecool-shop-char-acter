@@ -2,10 +2,13 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
 public class OrderList {
+    private static final Logger logger = LoggerFactory.getLogger(OrderList.class);
     public enum Status {newOrder, inCart, inCheckOut, payed}
     private Integer nextId = 1;
     private Integer inCartId;
@@ -27,6 +30,7 @@ public class OrderList {
         switch (getStatus()){
             case newOrder:
                 addProductToCart(productId);
+                logger.info("Added a new item to shopping cart.");
                 break;
             case inCart:
                 //doublecheck products, change quantity, delete, etc...

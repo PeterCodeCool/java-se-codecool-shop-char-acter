@@ -5,13 +5,15 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
-
+    private static final Logger logger = LoggerFactory.getLogger(ProductDao.class);
     private List<Product> DATA = new ArrayList<>();
     private static ProductDaoMem instance = null;
 
@@ -31,6 +33,7 @@ public class ProductDaoMem implements ProductDao {
     public void add(Product product) {
         product.setId(DATA.size() + 1);
         DATA.add(product);
+        logger.info("Add new product: " + product.toString());
     }
 
     @Override
@@ -41,6 +44,7 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public void remove(int id) {
         DATA.remove(find(id));
+        logger.info("Removed from product: ", find(id));
     }
 
     @Override

@@ -2,12 +2,14 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoMem implements SupplierDao {
-
+    private static final Logger logger = LoggerFactory.getLogger(SupplierDao.class);
     private List<Supplier> DATA = new ArrayList<>();
     private static SupplierDaoMem instance = null;
 
@@ -27,6 +29,7 @@ public class SupplierDaoMem implements SupplierDao {
     public void add(Supplier supplier) {
         supplier.setId(DATA.size() + 1);
         DATA.add(supplier);
+        logger.info("Create a new supplier: " +  supplier.toString());
     }
 
     @Override
@@ -39,6 +42,7 @@ public class SupplierDaoMem implements SupplierDao {
     @Override
     public void remove(int id) {
         DATA.remove(find(id));
+        logger.info("Removed from supplier: ", find(id));
     }
 
     @Override
