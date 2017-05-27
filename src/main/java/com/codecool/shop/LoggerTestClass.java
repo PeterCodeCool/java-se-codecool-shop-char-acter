@@ -31,7 +31,7 @@ public class LoggerTestClass {
          *
          * @param user the format string
          * @param Calendar    the argument
-         *                    
+         *
          */
         LOGGER.info("Bad experience for user " + user + " at time " + Calendar.getInstance().getTime());
         LOGGER.info("Bad experience for user {}", user);
