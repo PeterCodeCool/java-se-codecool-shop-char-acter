@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration debug="true">
     <appender>
-        <encoder name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder name="STDOUT" class="org.slf4j">
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</pattern>
         </encoder>
     </appender>
